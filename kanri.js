@@ -1,6 +1,6 @@
 function paswordCheck(){
   const input = document.getElementById("password").value;
-  const correct = "bingo123";
+  const correct = "kotekDoer1875";
   
   if (input === correct) {
     window.location.href = "./kanri.html";
