@@ -76,7 +76,7 @@ h1{
   z-index: 2;
 
   color: black;      /* Safariで透明バグを回避 */
-  opacity: 0.3;      /* ⭐️をうっすら表示（ここで調整） */
+  opacity: 0.7;      /* ⭐️をうっすら表示（ここで調整） */
 }
 .free {
   display: flex;
