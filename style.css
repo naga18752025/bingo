@@ -109,3 +109,8 @@ h1{
   align-items: center;
   justify-content: center;
 }
+
+.cell-number {
+  color: rgba(0, 0, 0, 0.3); /* 数字をうっすら表示 */
+  z-index: 1;
+}
