@@ -37,11 +37,7 @@ function generateBingoCard() {
       if (value === "FREE") {
         cell.classList.add("free");
           cell.addEventListener("click", () => {
-            if (cell.classList.contains("free")) {
-              cell.classList.remove("free");
-            }else{
-              cell.classList.add("free");
-            }
+            cell.classList.remove("free");
             cell.classList.add("marked");
             if (checkBingo()) {
               document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
