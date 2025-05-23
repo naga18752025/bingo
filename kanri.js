@@ -1,4 +1,4 @@
-unction paswordCheck(){
+function paswordCheck(){
   const input = document.getElementById("password").value;
   const correct = "bingo123";
   
