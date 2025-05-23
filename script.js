@@ -32,8 +32,8 @@ function generateBingoCard() {
       const cell = document.createElement("div");
       const value = columns[col][row];
 
-      cell.textContent = value;
-
+      cell.innerHTML = `<span class="cell-number">${value}</span>`;
+      
       if (value === "FREE") {
         cell.classList.add("free");
           cell.addEventListener("click", () => {
