@@ -69,8 +69,7 @@ h1{
   justify-content: center;       
   text-align: center;   
   vertical-align: center;  
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.7); 
+  font-weight: bold; 
 }
 
 .marked::after {
@@ -81,6 +80,7 @@ h1{
   transform: translate(-50%, -50%);
   font-size: 50px;
   pointer-events: none;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .free {
