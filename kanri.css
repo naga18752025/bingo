@@ -30,7 +30,7 @@ h1{
   align-items: center;
 }
 
-button {
+.start{
   margin-top: 10vh;
   background-color: #ffb703;        /* 明るめの黄色 */
   color: #fff;                      /* 白文字 */
@@ -45,17 +45,28 @@ button {
 }
 
 /* 押したときにちょっとへこむ */
-button:active {
+.start:active {
   transform: scale(0.97);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* ホバー時にちょっと濃く */
-button:hover {
+.start:hover {
   background-color: #ffa500;
 }
 
 .bango{
   padding: 70px;
   background-color: #ffffff;
+}
+
+.reset{
+  margin-top: 5vh;
+  color: #0c2fbb;                      
+  font-size: 15px;                  
+  background:none;                               
+  cursor: pointer;         
+  border: none;
+  border-bottom: 1px solid #0c2fbb;
+  padding-bottom: 0;
 }
