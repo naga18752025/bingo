@@ -73,8 +73,11 @@ h1{
   transform: translate(-50%, -50%);
   font-size: 50px;
   pointer-events: none;
-}
+  z-index: 2;
 
+  color: black;      /* Safariで透明バグを回避 */
+  opacity: 0.3;      /* ⭐️をうっすら表示（ここで調整） */
+}
 .free {
   display: flex;
   justify-content: center;       
