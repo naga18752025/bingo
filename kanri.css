@@ -23,6 +23,7 @@ h1{
 }
 
 .container {
+  width: 100%;
   margin-top: 0;
   padding-top: 0;
   display: flex;
@@ -56,10 +57,14 @@ h1{
 }
 
 .bango{
-  width: 30%;
-  padding: 70px;
+  min-width: 230px;
+  width: 40%;
+  height: 30%;
+  padding-top: 0;
+  padding-bottom: 0;
   background-color: #ffffff;
   text-align: center;
+  font-size: 50px;
 }
 
 .reset{
