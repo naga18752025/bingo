@@ -1,3 +1,16 @@
+unction paswordCheck(){
+  const input = document.getElementById("password").value;
+  const correct = "bingo123";
+  
+  if (input === correct) {
+    window.location.href = "./kanri.html";
+    return false; 
+  } else {
+    alert("パスワードが違います！");
+    return false; 
+  }
+}
+
 const numbers2 = [];
 
 for (let i = 1; i <= 75; i++){
