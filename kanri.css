@@ -56,8 +56,10 @@ h1{
 }
 
 .bango{
+  width: 30%;
   padding: 70px;
   background-color: #ffffff;
+  text-align: center;
 }
 
 .reset{
@@ -69,4 +71,15 @@ h1{
   border: none;
   border-bottom: 1px solid #0c2fbb;
   padding-bottom: 0;
+}
+
+/* 押したときにちょっとへこむ */
+.reset:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ホバー時にちょっと濃く */
+.reset:hover {
+  background-color: #ffffff;
 }
