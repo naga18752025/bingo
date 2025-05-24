@@ -64,8 +64,15 @@ h1{
   padding-top: 0;
   padding-bottom: 0;
   background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: 50px;
+}
+
+h2{
+  text-align: center;
 }
 
 .reset{
