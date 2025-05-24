@@ -1,6 +1,12 @@
+const supabaseUrl = "https://ngvdppfzcgbkdtjlwbvh.supabase.co"; // あなたのURL
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndmRwcGZ6Y2dia2R0amx3YnZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwODU5NjMsImV4cCI6MjA2MzY2MTk2M30.6bVDy_sbtV4k_AvGeQ_aTtRhz4tBsJb2o_q8Y-OmwMA";             // あなたの鍵
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
 }
+
+let drawnNumbers = [];
 
 function loadCardFromStorage() {
   const data = localStorage.getItem("bingoCard");
@@ -69,11 +75,17 @@ function generateBingoCard() {
         });
       } else {
         cell.addEventListener("click", () => {
-          cell.classList.toggle("marked");
-          if (checkBingo()) {
-            document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-          }else{
-            document.getElementById("bingo-message").textContent = "";
+          const value = cell.textContent;
+          if (drawnNumbers.includes(Number(value))) {
+            cell.classList.toggle("marked");
+
+            if (checkBingo()) {
+              document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+            } else {
+              document.getElementById("bingo-message").textContent = "";
+            }
+          } else {
+            alert("この数字はまだ出ていません！");
           }
         });
       }
@@ -138,7 +150,7 @@ function checkPasswordAndReset() {
 
 function animateCell(cell, finalValue) {
   let count = 0;
-  const maxCount = 50; // 表示切り替え回数
+  const maxCount = 30; // 表示切り替え回数
   const interval = setInterval(() => {
     const fakeValue = Math.floor(Math.random() * 75) + 1;
     cell.textContent = fakeValue;
@@ -148,4 +160,19 @@ function animateCell(cell, finalValue) {
       cell.textContent = finalValue;
     }
   }, 100); // 50msごとに切り替え
+}
+
+async function fetchDrawnNumbers() {
+  const { data, error } = await supabase
+    .from("bingo_numbers")
+    .select("number");
+
+  if (error) {
+    console.error("番号の取得に失敗:", error.message);
+    return;
+  }
+
+  // 番号だけの配列に変換
+  drawnNumbers = data.map(item => item.number);
+  console.log("最新番号を取得:", drawnNumbers);
 }
