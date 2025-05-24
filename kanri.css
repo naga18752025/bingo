@@ -88,3 +88,7 @@ h1{
 .reset:hover {
   background-color: #ffffff;
 }
+
+#send-password, button{
+  font-size: 16px;
+}
