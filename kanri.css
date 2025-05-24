@@ -38,7 +38,7 @@ h1{
   color: #fff;                      /* 白文字 */
   font-size: 20px;                  /* 少し大きめの文字 */
   font-weight: bold;
-  padding: 12px 24px;               /* 余白たっぷり */
+  padding: 18px 50px;               /* 余白たっぷり */
   border: none;                     /* 枠線なし */
   border-radius: 12px;              /* 丸み */
   cursor: pointer;                  /* ポインター表示 */
