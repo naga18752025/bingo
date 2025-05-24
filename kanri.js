@@ -3,7 +3,7 @@ function paswordCheck(){
   const correct = "kotekDoer1875";
   
   if (input === correct) {
-    window.location.href = "./kanri.html";
+    window.location.href = "./f7QXpB29VcJmRUyTK1NwZLqE34gsHD.html";
     return false; 
   } else {
     alert("パスワードが違います！");
