@@ -25,6 +25,8 @@ function generateColumnNumbers(start, end) {
 function generateBingoCard() {
   let columns = loadCardFromStorage();
 
+  const animated = !columns;
+
   if (!columns) {
     columns = [
       generateColumnNumbers(1, 15),   // B
@@ -44,7 +46,12 @@ function generateBingoCard() {
     for (let col = 0; col < 5; col++) {
       const cell = document.createElement("div");
       const value = columns[col][row];
-      cell.textContent = value;
+
+      if (animated) {
+        animateCell(cell, value);
+      } else {
+        cell.textContent = value;
+      }
 
       if (value === "FREE") {
         cell.classList.add("free");
@@ -119,4 +126,18 @@ function checkPasswordAndReset() {
   } else {
     alert("パスワードが違います！");
   }
+}
+
+function animateCell(cell, finalValue) {
+  let count = 0;
+  const maxCount = 30; // 表示切り替え回数
+  const interval = setInterval(() => {
+    const fakeValue = Math.floor(Math.random() * 75) + 1;
+    cell.textContent = fakeValue;
+    count++;
+    if (count >= maxCount) {
+      clearInterval(interval);
+      cell.textContent = finalValue;
+    }
+  }, 100); // 50msごとに切り替え
 }
