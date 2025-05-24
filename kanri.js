@@ -24,6 +24,7 @@ function PasswordCheck2() {
 }
 
 const numbers2 = [];
+const allNumbers = [];
 
 for (let i = 1; i <= 75; i++){
   numbers2.push(i);
@@ -38,6 +39,7 @@ function bingoNumber() {
   const index = Math.floor(Math.random() * numbers2.length);
   const number = numbers2[index];
   numbers2.splice(index, 1); // 番号を1回限りにする
+  allNumbers.push(number);
   let count = 0;
   const maxFlashes = 50;  // フラッシュの回数
   const flashInterval = 50; // ミリ秒間隔
@@ -50,12 +52,16 @@ function bingoNumber() {
     if (count >= maxFlashes) {
       clearInterval(interval); // ストップ
       document.getElementById("number").textContent = number; // 本物を表示
+      document.getElementById("koremade").textContent = allNumbers.join(", ");
     }
   }, flashInterval);
 }
 
 function bingoReset(){
+  allNumbers.length = [];
+  document.getElementById("koremade").textContent = allNumbers.join(", ");
   for (let i = 1; i <= 75; i++){
     numbers2.push(i);
   }
+  document.getElementById("number").textContent = "番号";
 }
