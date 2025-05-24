@@ -31,11 +31,14 @@ for (let i = 1; i <= 75; i++){
 }
 
 function bingoNumber() {
+  if (!isClickable) return;
+
+  isClickable = false;
+
   if (numbers2.length === 0) {
     document.getElementById("number").textContent = "終了！";
     return;
   }
-
   const index = Math.floor(Math.random() * numbers2.length);
   const number = numbers2[index];
   numbers2.splice(index, 1); // 番号を1回限りにする
@@ -55,6 +58,9 @@ function bingoNumber() {
       document.getElementById("koremade").textContent = allNumbers.join(", ");
     }
   }, flashInterval);
+  setTimeout(() => {
+    isClickable = true;
+  }, 3000);
 }
 
 function bingoReset(){
