@@ -1,3 +1,5 @@
+let isClickable = true;
+
 function paswordCheck(){
   const input = document.getElementById("password").value;
   const correct = "bampaku"; // ← ここで正解パスワードを設定
