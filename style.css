@@ -174,10 +174,10 @@ a:hover{
 }
 
 #password-form input {
-  font-size: 10px;
+  font-size: 16px;
 }
 
 #password-form button {
-  font-size: 10px;
+  font-size: 16px;
   cursor: pointer;
 }
