@@ -98,4 +98,7 @@ h1{
   margin-top: 5vh;
   min-width: 230px;
   width: 40%;
+  background-color: #dbf3ff;
+  padding: 5px;
+  border-radius: 10px;
 }
