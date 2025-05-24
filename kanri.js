@@ -1,6 +1,6 @@
 function paswordCheck(){
   const input = document.getElementById("password").value;
-  const correct = "kotekDoer1875"; // ← ここで正解パスワードを設定
+  const correct = "bampaku"; // ← ここで正解パスワードを設定
   
   if (input === correct) {
     window.location.href = "./f7QXpB29VcJmRUyTK1NwZLqE34gsHD.html"; // ← 行き先ページを指定
@@ -13,7 +13,7 @@ function paswordCheck(){
 
 function PasswordCheck2() {
   const input = document.getElementById("send-password").value;
-  const correctPassword = "kousyoudayo"; // ここを好きなパスワードに
+  const correctPassword = "osaka"; // ここを好きなパスワードに
 
   if (input === correctPassword) {
     document.querySelector(".container").style.display = "flex";
