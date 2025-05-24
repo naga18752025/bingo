@@ -1,13 +1,25 @@
 function paswordCheck(){
   const input = document.getElementById("password").value;
-  const correct = "kotekDoer1875";
+  const correct = "kotekDoer1875"; // ← ここで正解パスワードを設定
   
   if (input === correct) {
-    window.location.href = "./f7QXpB29VcJmRUyTK1NwZLqE34gsHD.html";
-    return false; 
+    window.location.href = "./kanri.html"; // ← 行き先ページを指定
+    return false; // フォームの送信をキャンセル（リダイレクトだけする）
   } else {
     alert("パスワードが違います！");
-    return false; 
+    return false; // 送信しない（ページ遷移しない）
+  }
+}
+
+function PasswordCheck2() {
+  const input = document.getElementById("send-password").value;
+  const correctPassword = "kousyoudayo"; // ここを好きなパスワードに
+
+  if (input === correctPassword) {
+    document.querySelector(".container").style.display = "flex";
+    document.querySelector(".pass2").style.display = "none";
+  } else {
+    alert("パスワードが違います！");
   }
 }
 
