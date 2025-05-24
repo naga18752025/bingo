@@ -47,10 +47,14 @@ function generateBingoCard() {
       const cell = document.createElement("div");
       const value = columns[col][row];
 
-      if (animated) {
-        animateCell(cell, value);
-      } else {
+      if (value === "FREE") {
         cell.textContent = value;
+      } else {
+        if (animated) {
+          animateCell(cell, value);
+        } else {
+          cell.textContent = value;
+        }
       }
 
       if (value === "FREE") {
@@ -134,7 +138,7 @@ function checkPasswordAndReset() {
 
 function animateCell(cell, finalValue) {
   let count = 0;
-  const maxCount = 30; // 表示切り替え回数
+  const maxCount = 50; // 表示切り替え回数
   const interval = setInterval(() => {
     const fakeValue = Math.floor(Math.random() * 75) + 1;
     cell.textContent = fakeValue;
