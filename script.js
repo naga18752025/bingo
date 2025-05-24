@@ -56,16 +56,20 @@ function generateBingoCard() {
       if (value === "FREE") {
         cell.classList.add("free");
         cell.addEventListener("click", () => {
-          cell.classList.add("marked");
+          cell.classList.toggle("marked");
           if (checkBingo()) {
             document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+          }else{
+            document.getElementById("bingo-message").textContent = "";
           }
         });
       } else {
         cell.addEventListener("click", () => {
-          cell.classList.add("marked");
+          cell.classList.toggle("marked");
           if (checkBingo()) {
             document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+          }else{
+            document.getElementById("bingo-message").textContent = "";
           }
         });
       }
