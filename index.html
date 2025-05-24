@@ -20,6 +20,15 @@
        <!-- JavaScriptで埋める -->
      </div>
    </div>
+    <div class="btn">
+      <button onclick="showPasswordForm()" class="btn2">カードをリセット</button>
+    </div>
+    <div class="pas">
+      <div id="password-form" style="display: none; margin-top: 10px;">
+        <input type="password" id="reset-password" placeholder="パスワードを入力">
+        <button onclick="checkPasswordAndReset()">送信</button>
+      </div>
+    </div>
     <a href="./password.html">管理者ログイン</a>
   </div>
   <script src="script.js"></script>
