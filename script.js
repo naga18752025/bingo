@@ -1,3 +1,12 @@
+function saveCardToStorage(columns) {
+  localStorage.setItem("bingoCard", JSON.stringify(columns));
+}
+
+function loadCardFromStorage() {
+  const data = localStorage.getItem("bingoCard");
+  return data ? JSON.parse(data) : null;
+}
+
 function generateColumnNumbers(start, end) {
   const numbers = [];
   for (let i = start; i <= end; i++) {
@@ -14,41 +23,38 @@ function generateColumnNumbers(start, end) {
 }
 
 function generateBingoCard() {
-  const columns = [
-    generateColumnNumbers(1, 15),   // B
-    generateColumnNumbers(16, 30),  // I
-    generateColumnNumbers(31, 45),  // N
-    generateColumnNumbers(46, 60),  // G
-    generateColumnNumbers(61, 75),  // O
-  ];
+  let columns = loadCardFromStorage();
 
-  // 中央にFREE
-  columns[2][2] = "FREE";
+  if (!columns) {
+    columns = [
+      generateColumnNumbers(1, 15),   // B
+      generateColumnNumbers(16, 30),  // I
+      generateColumnNumbers(31, 45),  // N
+      generateColumnNumbers(46, 60),  // G
+      generateColumnNumbers(61, 75),  // O
+    ];
+    columns[2][2] = "FREE";
+    saveCardToStorage(columns); // 保存する
+  }
 
   const grid = document.getElementById("bingo-grid");
+  grid.innerHTML = ""; // 再生成対策（既にあれば一度消す）
 
   for (let row = 0; row < 5; row++) {
     for (let col = 0; col < 5; col++) {
       const cell = document.createElement("div");
       const value = columns[col][row];
-
       cell.textContent = value;
 
       if (value === "FREE") {
         cell.classList.add("free");
-          cell.addEventListener("click", () => {
-            if (cell.classList.contains("free")) {
-              cell.classList.remove("free");
-            }else{
-              cell.classList.add("free");
-            }
-            cell.classList.add("marked");
-            if (checkBingo()) {
-              document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-            }
-          });
+        cell.addEventListener("click", () => {
+          cell.classList.add("marked");
+          if (checkBingo()) {
+            document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+          }
+        });
       } else {
-        // クリックイベントで「穴を開ける」
         cell.addEventListener("click", () => {
           cell.classList.add("marked");
           if (checkBingo()) {
@@ -92,4 +98,25 @@ function checkBingo() {
   if (grid.every((row, i) => row[4 - i])) return true;
 
   return false;
+}
+
+function resetCard() {
+  localStorage.removeItem("bingoCard");
+  location.reload(); // ページ再読み込みで再生成される
+}
+
+function showPasswordForm() {
+  document.getElementById("password-form").style.display = "block";
+}
+
+function checkPasswordAndReset() {
+  const input = document.getElementById("reset-password").value;
+  const correctPassword = "bingo123"; // ここを好きなパスワードに
+
+  if (input === correctPassword) {
+    localStorage.removeItem("bingoCard");
+    location.reload(); // ページをリロード（カード再生成）
+  } else {
+    alert("パスワードが違います！");
+  }
 }
