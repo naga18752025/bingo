@@ -297,7 +297,7 @@ function toggleFreeClickMode() {
       : "自由モードに切り替える";
 
     document.getElementById("mode-info").textContent = freeClickMode
-      ? "⚠ 現在、自由モードです。⚠︎"
+      ? "⚠️ 現在、自由モードです。⚠️"
       : "";
   }
 }
