@@ -278,12 +278,17 @@ function toggleFreeClickMode() {
   );
 
   if (confirmed) {
-    if(document.getElementById("happyou").style.display !== "none"){
-      document.getElementById("happyou").style.display = "none";
-      document.getElementById("kokomade").style.display = "none";
-    }else{
-      document.getElementById("happyou").style.display = "flex";
-      document.getElementById("kokomade").style.display = "flex";
+    const happyou = document.getElementById("happyou");
+    const kokomade = document.getElementById("kokomade");
+
+    const isVisible = window.getComputedStyle(happyou).display !== "none";
+
+    if (isVisible) {
+      happyou.style.display = "none";
+      kokomade.style.display = "none";
+    } else {
+      happyou.style.display = "flex";
+      kokomade.style.display = "flex";
     }
     const cells = document.querySelectorAll("#bingo-grid div");
     
