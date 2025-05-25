@@ -3,6 +3,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 let isAnimating = false;
+let freeClickMode = false;
 
 function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
@@ -83,7 +84,7 @@ function generateBingoCard() {
         cell.addEventListener("click", () => {
           if (isAnimating) return;
           const value = cell.textContent;
-          if (drawnNumbers.includes(Number(value))) {
+          if (freeClickMode || drawnNumbers.includes(Number(value))) {
             cell.classList.toggle("marked");
 
             if (checkBingo()) {
@@ -267,4 +268,38 @@ function countReaches() {
   if (diag2 === 4) reachCount++;
 
   return reachCount;
+}
+
+function toggleFreeClickMode() {
+  const confirmed = confirm(
+    freeClickMode
+      ? "通常モードに戻しますか？"
+      : "好きに数字を押せる自由モードに切り替えますか？"
+  );
+
+  if (confirmed) {
+    if(document.getElementById("happyou").style.display !== "none"){
+      document.getElementById("happyou").style.display = "none";
+      document.getElementById("kokomade").style.display = "none";
+    }else{
+      document.getElementById("happyou").style.display = "flex";
+      document.getElementById("kokomade").style.display = "flex";
+    }
+    const cells = document.querySelectorAll("#bingo-grid div");
+    
+    cells.forEach(cell => {
+      if (cell.classList.contains("marked")) {
+        cell.classList.remove("marked");
+      }
+    });
+    freeClickMode = !freeClickMode;
+
+    document.getElementById("mode-toggle-button").textContent = freeClickMode
+      ? "通常モードに戻す"
+      : "自由モードに切り替える";
+
+    document.getElementById("mode-info").textContent = freeClickMode
+      ? "⚠ 現在、自由モードです。⚠︎"
+      : "";
+  }
 }
