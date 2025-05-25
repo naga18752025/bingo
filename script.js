@@ -280,16 +280,9 @@ function toggleFreeClickMode() {
   if (confirmed) {
     const happyou = document.getElementById("happyou");
     const kokomade = document.getElementById("kokomade");
-
     const isVisible = window.getComputedStyle(happyou).display !== "none";
-
-    if (isVisible) {
-      happyou.style.display = "none";
-      kokomade.style.display = "none";
-    } else {
-      happyou.style.display = "flex";
-      kokomade.style.display = "flex";
-    }
+    happyou.style.display = isVisible ? "none" : "block";
+    kokomade.style.display = isVisible ? "none" : "block";
     const cells = document.querySelectorAll("#bingo-grid div");
     
     cells.forEach(cell => {
