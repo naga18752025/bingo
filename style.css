@@ -113,7 +113,7 @@ h1{
   color: red;
   text-align: center;
   animation: flash 1s infinite alternate;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 @keyframes flash {
