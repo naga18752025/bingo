@@ -8,7 +8,7 @@ function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
 }
 
-let drawnNumbers = [];
+let drawnNumbers = ["まだ番号は発表されていません"];
 
 function loadCardFromStorage() {
   const data = localStorage.getItem("bingoCard");
@@ -103,6 +103,7 @@ function generateBingoCard() {
       grid.appendChild(cell);
     }
   }
+  document.getElementById("kokomade").textContent = "まだ番号は発表されていません";
 }
 
 
@@ -185,9 +186,13 @@ async function fetchDrawnNumbers() {
   }
 
   // 番号だけの配列に変換
+  drawnNumbers = [];
   drawnNumbers = data.map(item => item.number);
   console.log("最新番号を取得:", drawnNumbers);
   document.getElementById("kokomade").textContent = drawnNumbers.join(", ");
+  if(drawnNumbers.length === 0){
+    document.getElementById("kokomade").textContent = "まだ番号は発表されていません";
+  }
 }
 
 function countReaches() {
