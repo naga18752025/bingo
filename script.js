@@ -144,7 +144,14 @@ function resetCard() {
 }
 
 function showPasswordForm() {
-  document.getElementById("password-form").style.display = "block";
+  const form = document.getElementById("password-form");
+  if (form.style.display === "block") {
+    document.getElementById("reset-button").textContent = "カードをリセット";
+    form.style.display = "none";
+  } else {
+    document.getElementById("reset-button").textContent = "戻る";
+    form.style.display = "block";
+  }
 }
 
 function checkPasswordAndReset() {
