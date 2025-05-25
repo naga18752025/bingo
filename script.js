@@ -103,7 +103,7 @@ function generateBingoCard() {
       grid.appendChild(cell);
     }
   }
-  document.getElementById("kokomade").textContent = "まだ番号は発表されていません";
+  document.getElementById("kokomade").textContent = "発表番号を取得してください";
 }
 
 
