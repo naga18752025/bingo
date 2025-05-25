@@ -2,6 +2,8 @@ const supabaseUrl = "https://ngvdppfzcgbkdtjlwbvh.supabase.co"; // あなたのU
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ndmRwcGZ6Y2dia2R0amx3YnZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwODU5NjMsImV4cCI6MjA2MzY2MTk2M30.6bVDy_sbtV4k_AvGeQ_aTtRhz4tBsJb2o_q8Y-OmwMA";             // あなたの鍵
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+let isAnimating = false;
+
 function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
 }
@@ -66,6 +68,7 @@ function generateBingoCard() {
       if (value === "FREE") {
         cell.classList.add("free");
         cell.addEventListener("click", () => {
+          if (isAnimating) return;
           cell.classList.toggle("marked");
           if (checkBingo()) {
             document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
@@ -78,6 +81,7 @@ function generateBingoCard() {
         });
       } else {
         cell.addEventListener("click", () => {
+          if (isAnimating) return;
           const value = cell.textContent;
           if (drawnNumbers.includes(Number(value))) {
             cell.classList.toggle("marked");
@@ -155,6 +159,7 @@ function checkPasswordAndReset() {
 }
 
 function animateCell(cell, finalValue) {
+  isAnimating = true;
   let count = 0;
   const maxCount = 30; // 表示切り替え回数
   const interval = setInterval(() => {
@@ -164,6 +169,7 @@ function animateCell(cell, finalValue) {
     if (count >= maxCount) {
       clearInterval(interval);
       cell.textContent = finalValue;
+      isAnimating = false;
     }
   }, 100); // 50msごとに切り替え
 }
