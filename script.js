@@ -69,6 +69,9 @@ function generateBingoCard() {
           cell.classList.toggle("marked");
           if (checkBingo()) {
             document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+          }else if(countReaches() > 0){
+            const reach = countReaches();
+            document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
           }else{
             document.getElementById("bingo-message").textContent = "";
           }
@@ -81,7 +84,10 @@ function generateBingoCard() {
 
             if (checkBingo()) {
               document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-            } else {
+            }else if(countReaches() > 0){
+              const reach = countReaches();
+              document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
+            }else {
               document.getElementById("bingo-message").textContent = "";
             }
           } else {
@@ -176,4 +182,49 @@ async function fetchDrawnNumbers() {
   drawnNumbers = data.map(item => item.number);
   console.log("最新番号を取得:", drawnNumbers);
   document.getElementById("kokomade").textContent = drawnNumbers.join(", ");
+}
+
+function countReaches() {
+  const cells = document.querySelectorAll("#bingo-grid div");
+  const grid = [...Array(5)].map(() => Array(5));
+
+  // セルを5x5の2次元配列に詰め直す
+  cells.forEach((cell, i) => {
+    const row = Math.floor(i / 5);
+    const col = i % 5;
+    grid[row][col] = cell.classList.contains("marked");
+  });
+
+  let reachCount = 0;
+
+  // 横方向
+  for (let row = 0; row < 5; row++) {
+    const marked = grid[row].filter(v => v).length;
+    if (marked === 4) reachCount++;
+  }
+
+  // 縦方向
+  for (let col = 0; col < 5; col++) {
+    let marked = 0;
+    for (let row = 0; row < 5; row++) {
+      if (grid[row][col]) marked++;
+    }
+    if (marked === 4) reachCount++;
+  }
+
+  // 斜め（左上→右下）
+  let diag1 = 0;
+  for (let i = 0; i < 5; i++) {
+    if (grid[i][i]) diag1++;
+  }
+  if (diag1 === 4) reachCount++;
+
+  // 斜め（右上→左下）
+  let diag2 = 0;
+  for (let i = 0; i < 5; i++) {
+    if (grid[i][4 - i]) diag2++;
+  }
+  if (diag2 === 4) reachCount++;
+
+  return reachCount;
 }
