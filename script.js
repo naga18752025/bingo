@@ -175,4 +175,5 @@ async function fetchDrawnNumbers() {
   // 番号だけの配列に変換
   drawnNumbers = data.map(item => item.number);
   console.log("最新番号を取得:", drawnNumbers);
+  document.getElementById("kokomade").textContent = drawnNumbers.join(", ");
 }
