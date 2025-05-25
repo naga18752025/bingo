@@ -8,7 +8,7 @@ function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
 }
 
-let drawnNumbers = ["まだ番号は発表されていません"];
+let drawnNumbers = [];
 
 function loadCardFromStorage() {
   const data = localStorage.getItem("bingoCard");
@@ -192,6 +192,28 @@ async function fetchDrawnNumbers() {
   document.getElementById("kokomade").textContent = drawnNumbers.join(", ");
   if(drawnNumbers.length === 0){
     document.getElementById("kokomade").textContent = "まだ番号は発表されていません";
+  }
+
+  const cells = document.querySelectorAll("#bingo-grid div");
+  cells.forEach(cell => {
+    const value = cell.textContent;
+
+    if (value === "FREE") return; // FREEマスは無視
+
+    const num = Number(value);
+    if (cell.classList.contains("marked") && !drawnNumbers.includes(num)) {
+      cell.classList.remove("marked");
+    }
+  });
+
+  // 画面のビンゴ状態を再チェック
+  if (checkBingo()) {
+    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+  } else if (countReaches() > 0) {
+    const reach = countReaches();
+    document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
+  } else {
+    document.getElementById("bingo-message").textContent = "";
   }
 }
 
