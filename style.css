@@ -181,3 +181,12 @@ a:hover{
   font-size: 16px;
   cursor: pointer;
 }
+
+#kokomade{
+  margin: 2vh auto 0 auto; 
+  width: 270px;
+  background-color: #dbf3ff;
+  color: #6e6e6e;
+  padding: 5px;
+  border-radius: 10px;
+}
