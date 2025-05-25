@@ -68,7 +68,14 @@ async function bingoNumber() {
     count++;
     if (count >= maxFlashes) {
       clearInterval(interval); // ストップ
-      document.getElementById("number").textContent = number; // 本物を表示
+      const numberElem = document.getElementById("number");
+      numberElem.textContent = number;
+
+      // ⭐️ここでアニメーションを適用
+      numberElem.classList.remove("animate-number"); // 一度外す
+      void numberElem.offsetWidth; // 強制再描画（これで再生される）
+      numberElem.classList.add("animate-number");
+
       document.getElementById("koremade").textContent = allNumbers.join(", ");
     }
   }, flashInterval);
