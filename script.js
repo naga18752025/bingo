@@ -313,4 +313,14 @@ function toggleFreeClickMode() {
       ? "⚠️ 現在、自由モードです。⚠️"
       : "";
   }
+
+  if (checkBingo()) {
+    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+  } else if (countReaches() > 0) {
+    const reach = countReaches();
+    document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
+  } else {
+    document.getElementById("bingo-message").textContent = "";
+  }
+  
 }
