@@ -206,7 +206,7 @@ a:hover{
   background: linear-gradient(to bottom, #3366ff, #01289d); /* グラデーション */
   border: none;
   border-radius: 12px;
-  padding: 12px 50px;
+  padding: 12px 30px;
   cursor: pointer;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 浮き出る影 */
   transition: all 0.2s ease;
