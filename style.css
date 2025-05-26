@@ -158,7 +158,6 @@ a:hover{
   cursor: pointer;
   justify-content: center;
   align-items: center;
-
 }
 
 .btn2{
@@ -244,4 +243,38 @@ a:hover{
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.8;
   }
+}
+
+.mode{
+  display: flex;
+  margin-top: 10px;                 
+  font-size: 10px; 
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.mode2{
+  margin: 10px auto 0 auto;
+  width: 150px;
+  height: 30px;
+  color: #ffffff;                   
+  font-size: 10px; 
+  border: none;
+  background-color: #333;
+  border-radius:   5px;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 3px solid #737373;
+}
+
+.mode2:active {
+  color: #000000;
+  background-color: #d9d9d9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 3px solid #000000;
 }
