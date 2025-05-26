@@ -324,3 +324,25 @@ function toggleFreeClickMode() {
   }
   
 }
+
+  const button = document.querySelector('.btn3');
+
+  ['touchstart', 'mousedown'].forEach(evt => {
+    button.addEventListener(evt, () => {
+      button.classList.add('active-style');
+      setTimeout(() => {
+        button.classList.remove('active-style');
+      }, 100);
+    });
+  });
+
+  const button2 = document.querySelector('.mode2');
+
+  ['touchstart', 'mousedown'].forEach(evt => {
+    button2.addEventListener(evt, () => {
+      button2.classList.add('active-style');
+      setTimeout(() => {
+        button2.classList.remove('active-style');
+      }, 100);
+    });
+  });
