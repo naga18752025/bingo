@@ -50,13 +50,7 @@ async function bingoNumber() {
   const number = numbers2[index];
   numbers2.splice(index, 1); // 番号を1回限りにする
   allNumbers.push(number);
-  const { error } = await supabase
-    .from("bingo_numbers")
-    .insert([{ number }]);
 
-  if (error) {
-    console.error("Supabaseへの保存に失敗:", error.message);
-  }
   let count = 0;
   const maxFlashes = 50;  // フラッシュの回数
   const flashInterval = 50; // ミリ秒間隔
@@ -68,15 +62,17 @@ async function bingoNumber() {
     count++;
     if (count >= maxFlashes) {
       clearInterval(interval); // ストップ
-      const numberElem = document.getElementById("number");
-      numberElem.textContent = number;
-
-      // ⭐️ここでアニメーションを適用
-      numberElem.classList.remove("animate-number"); // 一度外す
-      void numberElem.offsetWidth; // 強制再描画（これで再生される）
-      numberElem.classList.add("animate-number");
-
+      document.getElementById("number").textContent = number; // 本物を表示
       document.getElementById("koremade").textContent = allNumbers.join(", ");
+      
+      supabase
+        .from("bingo_numbers")
+        .insert([{ number }])
+        .then(({ error }) => {
+          if (error) {
+            console.error("Supabaseへの保存に失敗:", error.message);
+          }
+        });
     }
   }, flashInterval);
   setTimeout(() => {
