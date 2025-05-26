@@ -104,7 +104,7 @@ function generateBingoCard() {
       grid.appendChild(cell);
     }
   }
-  document.getElementById("kokomade").textContent = "発表番号を取得してください";
+  document.getElementById("kokomade").textContent = "発表番号を読み込んでください";
 }
 
 
