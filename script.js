@@ -183,7 +183,20 @@ function animateCell(cell, finalValue) {
   }, 100); // 50msごとに切り替え
 }
 
+let isFetching = true
+
 async function fetchDrawnNumbers() {
+  if (!isFetching) {
+    alert("時間をおいてからクリックしてください");
+    return;
+  }
+
+  isFetching = false;
+
+  setTimeout(() => {
+    isFetching = true;
+  }, 5000);
+  
   const { data, error } = await supabase
     .from("bingo_numbers")
     .select("number");
