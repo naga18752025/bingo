@@ -326,7 +326,7 @@ function toggleFreeClickMode() {
     });
   });
 
-let bingohubuki = true
+let bingohubuki = true;
 
 function bingoAlert(){
   document.getElementById("bingo-message").style.fontSize = "40px";
