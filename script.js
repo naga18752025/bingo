@@ -73,6 +73,11 @@ function generateBingoCard() {
           cell.classList.toggle("marked");
           if (checkBingo()) {
             document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+            confetti({
+              particleCount: 150,
+              spread: 100,
+              origin: { y: 0.6 }
+            });
           }else if(countReaches() > 0){
             const reach = countReaches();
             document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
@@ -89,6 +94,11 @@ function generateBingoCard() {
 
             if (checkBingo()) {
               document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+              confetti({
+              particleCount: 150,
+              spread: 100,
+              origin: { y: 0.6 }
+            });
             }else if(countReaches() > 0){
               const reach = countReaches();
               document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
