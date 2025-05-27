@@ -4,6 +4,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 let isAnimating = false;
 let freeClickMode = false;
+let kaisu = 0;
 
 function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
@@ -194,6 +195,13 @@ async function fetchDrawnNumbers() {
   // 番号だけの配列に変換
   drawnNumbers = [];
   drawnNumbers = data.map(item => item.number);
+  if(drawnNumbers.length > 0 && drawnNumbers.length > kaisu){
+    const latestNumber = drawnNumbers[drawnNumbers.length - 1];
+    showBingoBall(latestNumber);
+    kaisu = drawnNumbers.length;
+  }else if(drawnNumbers.length === 0){
+    kaisu = 0;
+  }
   console.log("最新番号を取得:", drawnNumbers);
   document.getElementById("kokomade").textContent = drawnNumbers.join(", ");
   if(drawnNumbers.length === 0){
@@ -318,26 +326,70 @@ function toggleFreeClickMode() {
     });
   });
 
+let bingohubuki = true
+
 function bingoAlert(){
   document.getElementById("bingo-message").style.fontSize = "40px";
   if (checkBingo()) {
     document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-    confetti({
-      particleCount: 150,
-      spread: 100,
-      origin: { y: 0.6 }
-    });
+    if(bingohubuki){
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+    bingohubuki = false;
   }else if(countReaches() === 1){
     document.getElementById("bingo-message").textContent = "リーチ！";
+    bingohubuki = true;
   }else if(countReaches() === 2){
     document.getElementById("bingo-message").textContent = "ダブルリーチ！";
+    bingohubuki = true;
   }else if(countReaches() === 3){
     document.getElementById("bingo-message").style.fontSize = "35px";
     document.getElementById("bingo-message").textContent = "トリプルリーチ！";
+    bingohubuki = true;
   }else if(countReaches() > 3){
     const reach = countReaches();
     document.getElementById("bingo-message").textContent = `${reach}本リーチ！`;
+    bingohubuki = true;
   }else {
     document.getElementById("bingo-message").textContent = "";
+    bingohubuki = true;
   }
+}
+
+function showBingoBall(number) {
+  const ball = document.getElementById("bingo-ball");
+  const text = document.getElementById("ball-number");
+
+  text.textContent = number;
+  ball.style.display = "block";
+
+  // 初期状態（小さくて上の方）
+  gsap.set(ball, {
+    top: "10px", left: "50%", scale: 0.3, rotation: 0, opacity: 1
+  });
+
+  // 転がりながら中央に大きく
+  gsap.to(ball, {
+    duration: 2.2,
+    top: "40vh",
+    left: "50%",
+    scale: 2,
+    rotation: 720,
+    ease: "power2.out",
+    onComplete: () => {
+      // 少し待ってからフェードアウト
+      gsap.to(ball, {
+        duration: 1,
+        opacity: 0,
+        ease: "power1.out",
+        onComplete: () => {
+          ball.style.display = "none";
+        }
+      });
+    }
+  });
 }
