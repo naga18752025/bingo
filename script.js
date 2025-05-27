@@ -71,19 +71,7 @@ function generateBingoCard() {
         cell.addEventListener("click", () => {
           if (isAnimating) return;
           cell.classList.toggle("marked");
-          if (checkBingo()) {
-            document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-            confetti({
-              particleCount: 150,
-              spread: 100,
-              origin: { y: 0.6 }
-            });
-          }else if(countReaches() > 0){
-            const reach = countReaches();
-            document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
-          }else{
-            document.getElementById("bingo-message").textContent = "";
-          }
+          bingoAlert();
         });
       } else {
         cell.addEventListener("click", () => {
@@ -91,20 +79,7 @@ function generateBingoCard() {
           const value = cell.textContent;
           if (freeClickMode || drawnNumbers.includes(Number(value))) {
             cell.classList.toggle("marked");
-
-            if (checkBingo()) {
-              document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-              confetti({
-              particleCount: 150,
-              spread: 100,
-              origin: { y: 0.6 }
-            });
-            }else if(countReaches() > 0){
-              const reach = countReaches();
-              document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
-            }else {
-              document.getElementById("bingo-message").textContent = "";
-            }
+            bingoAlert();
           } else {
             alert("この数字はまだ出ていません！");
           }
@@ -238,14 +213,7 @@ async function fetchDrawnNumbers() {
   });
 
   // 画面のビンゴ状態を再チェック
-  if (checkBingo()) {
-    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-  } else if (countReaches() > 0) {
-    const reach = countReaches();
-    document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
-  } else {
-    document.getElementById("bingo-message").textContent = "";
-  }
+  bingoAlert();
 }
 
 function countReaches() {
@@ -299,6 +267,7 @@ function toggleFreeClickMode() {
       ? "通常モードに戻しますか？"
       : "好きに数字を押せる自由モードに切り替えますか？"
   );
+  
 
   if (confirmed) {
     const happyou = document.getElementById("happyou");
@@ -323,17 +292,9 @@ function toggleFreeClickMode() {
       ? "⚠️ 現在、自由モードです。⚠️"
       : "";
   }
-
-  if (checkBingo()) {
-    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-  } else if (countReaches() > 0) {
-    const reach = countReaches();
-    document.getElementById("bingo-message").textContent = `${reach}つリーチ！`;
-  } else {
-    document.getElementById("bingo-message").textContent = "";
-  }
-  
+  bingoAlert();
 }
+
 
   const button = document.querySelector('.btn3');
 
@@ -356,3 +317,27 @@ function toggleFreeClickMode() {
       }, 100);
     });
   });
+
+function bingoAlert(){
+  document.getElementById("bingo-message").style.fontSize = "40px";
+  if (checkBingo()) {
+    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+    confetti({
+      particleCount: 150,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+  }else if(countReaches() === 1){
+    document.getElementById("bingo-message").textContent = "リーチ！";
+  }else if(countReaches() === 2){
+    document.getElementById("bingo-message").textContent = "ダブルリーチ！";
+  }else if(countReaches() === 3){
+    document.getElementById("bingo-message").style.fontSize = "35px";
+    document.getElementById("bingo-message").textContent = "トリプルリーチ！";
+  }else if(countReaches() > 3){
+    const reach = countReaches();
+    document.getElementById("bingo-message").textContent = `${reach}本リーチ！`;
+  }else {
+    document.getElementById("bingo-message").textContent = "";
+  }
+}
