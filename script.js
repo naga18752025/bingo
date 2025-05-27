@@ -369,13 +369,13 @@ function showBingoBall(number) {
 
   // 初期状態（小さくて上の方）
   gsap.set(ball, {
-    top: "10px", left: "50%", scale: 0.3, rotation: 0, opacity: 1
+    top: "10%", left: "50%", scale: 0.3, rotation: 0, opacity: 1
   });
 
   // 転がりながら中央に大きく
   gsap.to(ball, {
     duration: 2.2,
-    top: "40vh",
+    top: "43%",
     left: "50%",
     scale: 2,
     rotation: 720,
