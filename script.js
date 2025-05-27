@@ -264,7 +264,7 @@ function countReaches() {
 function toggleFreeClickMode() {
   const confirmed = confirm(
     freeClickMode
-      ? "通常モードに戻しますか？"
+      ? "通信モードに戻しますか？"
       : "好きに数字を押せる自由モードに切り替えますか？"
   );
   
@@ -285,7 +285,7 @@ function toggleFreeClickMode() {
     freeClickMode = !freeClickMode;
 
     document.getElementById("mode-toggle-button").textContent = freeClickMode
-      ? "通常モードに戻す"
+      ? "通信モードに戻す"
       : "自由モードに切り替える";
 
     document.getElementById("mode-info").textContent = freeClickMode
