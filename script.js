@@ -5,6 +5,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 let isAnimating = false;
 let freeClickMode = false;
 let kaisu = 0;
+let nagasa = 0;
 
 function saveCardToStorage(columns) {
   localStorage.setItem("bingoCard", JSON.stringify(columns));
@@ -219,9 +220,13 @@ async function fetchDrawnNumbers() {
       cell.classList.remove("marked");
     }
   });
+  if(drawnNumbers.length <= nagasa && drawnNumbers.length !== 0){
+    alert("まだ新しい番号は発表されていません")
+  }
 
   // 画面のビンゴ状態を再チェック
   bingoAlert();
+  nagasa = drawnNumbers.length;
 }
 
 function countReaches() {
@@ -327,36 +332,49 @@ function toggleFreeClickMode() {
   });
 
 let bingohubuki = true;
+let bingoCount = 0;
 
 function bingoAlert(){
   document.getElementById("bingo-message").style.fontSize = "40px";
   if (checkBingo()) {
-    document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
-    if(bingohubuki){
+    if(checkBingoCount() === 1){
+      document.getElementById("bingo-message").textContent = "🎉 ビンゴ！ 🎉";
+    }else if(checkBingoCount() === 2){
+      document.getElementById("bingo-message").style.fontSize = "30px";
+      document.getElementById("bingo-message").textContent = "🎉 ダブルビンゴ！ 🎉";
+    }else if(checkBingoCount() === 3){
+      document.getElementById("bingo-message").style.fontSize = "25px";
+      document.getElementById("bingo-message").textContent = "🎉 トリプルビンゴ！ 🎉";
+    }else{
+      document.getElementById("bingo-message").style.fontSize = "30px";
+      document.getElementById("bingo-message").textContent = `🎉 ${checkBingoCount()}本ビンゴ！ 🎉`
+    }
+
+    if((checkBingoCount() > bingoCount)){
       confetti({
         particleCount: 150,
         spread: 100,
         origin: { y: 0.6 }
       });
     }
-    bingohubuki = false;
+    bingoCount = checkBingoCount();
   }else if(countReaches() === 1){
     document.getElementById("bingo-message").textContent = "リーチ！";
-    bingohubuki = true;
+    bingoCount = 0;
   }else if(countReaches() === 2){
     document.getElementById("bingo-message").textContent = "ダブルリーチ！";
-    bingohubuki = true;
+    bingoCount = 0;
   }else if(countReaches() === 3){
     document.getElementById("bingo-message").style.fontSize = "35px";
     document.getElementById("bingo-message").textContent = "トリプルリーチ！";
-    bingohubuki = true;
+    bingoCount = 0;
   }else if(countReaches() > 3){
     const reach = countReaches();
     document.getElementById("bingo-message").textContent = `${reach}本リーチ！`;
-    bingohubuki = true;
+    bingoCount = 0;
   }else {
     document.getElementById("bingo-message").textContent = "";
-    bingohubuki = true;
+    bingoCount = 0;
   }
 }
 
@@ -392,4 +410,36 @@ function showBingoBall(number) {
       });
     }
   });
+}
+
+function checkBingoCount() {
+  const cells = document.querySelectorAll("#bingo-grid div");
+  const grid = [...Array(5)].map(() => Array(5));
+
+  // セルを5x5の2次元配列に詰め直す
+  cells.forEach((cell, i) => {
+    const row = Math.floor(i / 5);
+    const col = i % 5;
+    grid[row][col] = cell.classList.contains("marked");
+  });
+
+  let bingoCount = 0;
+
+  // 横方向チェック
+  for (let row = 0; row < 5; row++) {
+    if (grid[row].every(v => v)) bingoCount++;
+  }
+
+  // 縦方向チェック
+  for (let col = 0; col < 5; col++) {
+    if (grid.every(row => row[col])) bingoCount++;
+  }
+
+  // 斜めチェック（左上→右下）
+  if (grid.every((row, i) => row[i])) bingoCount++;
+
+  // 斜めチェック（右上→左下）
+  if (grid.every((row, i) => row[4 - i])) bingoCount++;
+
+  return bingoCount;
 }
