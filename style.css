@@ -273,3 +273,25 @@ a:hover{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-bottom: 3px solid #000000;
 }
+
+.flash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  animation: flashEffect 0.6s ease;
+}
+
+@keyframes flashEffect {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
