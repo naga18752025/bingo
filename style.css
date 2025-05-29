@@ -8,7 +8,7 @@ body {
   align-items: center;
   height: 100%;
   background: #c2ebff;
-  font-family: 'Rounded Mplus 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 h1{
@@ -21,7 +21,6 @@ h1{
   font-size: 40px;
   font-weight: bold;
   color: #124381;
-  
 }
 
 .bingo-card {
@@ -171,7 +170,7 @@ a:hover{
   cursor: pointer;
   text-align: center;
   border-bottom: 1px solid #4258ff;
-  font-family: 'Rounded Mplus 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .btn2:hover{
@@ -215,7 +214,7 @@ a:hover{
   transition: all 0.2s ease;
   font-weight: bold;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4); /* テキストに陰影 */
-  font-family: 'Rounded Mplus 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 
@@ -272,7 +271,7 @@ a:hover{
   cursor: pointer;
   text-align: center;
   border-bottom: 3px solid #737373;
-  font-family: 'Rounded Mplus 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .mode2.active-style {
