@@ -1,12 +1,14 @@
 body {
-  margin: 0 auto 0 auto;
-  padding: 0 auto 0 auto;
-  font-family: sans-serif;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   background: #c2ebff;
+  font-family: 'Rounded Mplus 1c', sans-serif;
 }
 
 h1{
@@ -19,9 +21,11 @@ h1{
   font-size: 40px;
   font-weight: bold;
   color: #124381;
+  
 }
 
 .bingo-card {
+  font-family: 'Zen Maru Gothic', sans-serif;
   display: flex;
   flex-direction: column;
   border: none;
@@ -167,6 +171,7 @@ a:hover{
   cursor: pointer;
   text-align: center;
   border-bottom: 1px solid #4258ff;
+  font-family: 'Rounded Mplus 1c', sans-serif;
 }
 
 .btn2:hover{
@@ -206,10 +211,11 @@ a:hover{
   border-radius: 12px;
   padding: 12px 30px;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 浮き出る影 */
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.7); /* 浮き出る影 */
   transition: all 0.2s ease;
   font-weight: bold;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4); /* テキストに陰影 */
+  font-family: 'Rounded Mplus 1c', sans-serif;
 }
 
 
@@ -250,6 +256,7 @@ a:hover{
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  
 }
 
 .mode2{
@@ -265,13 +272,14 @@ a:hover{
   cursor: pointer;
   text-align: center;
   border-bottom: 3px solid #737373;
+  font-family: 'Rounded Mplus 1c', sans-serif;
 }
 
 .mode2.active-style {
   color: #000000;
   background-color: #d9d9d9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border-bottom: 3px solid #000000;
+  border-bottom: 3px solid #23429f;
 }
 
 .flash-overlay {
