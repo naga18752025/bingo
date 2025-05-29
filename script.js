@@ -222,9 +222,6 @@ async function fetchDrawnNumbers() {
       cell.classList.remove("marked");
     }
   });
-  if(drawnNumbers.length <= nagasa && drawnNumbers.length !== 0){
-    alert("まだ新しい番号は発表されていません")
-  }
 
   // 画面のビンゴ状態を再チェック
   bingoAlert();
