@@ -178,6 +178,8 @@ async function fetchDrawnNumbers() {
     return;
   }
 
+  triggerFlashEffect(); 
+
   isFetching = false;
 
   setTimeout(() => {
@@ -442,4 +444,11 @@ function checkBingoCount() {
   if (grid.every((row, i) => row[4 - i])) bingoCount++;
 
   return bingoCount;
+}
+
+function triggerFlashEffect() {
+  const flash = document.getElementById("flash-effect");
+  flash.classList.remove("flash-overlay"); // 再トリガーのため一度消す
+  void flash.offsetWidth; // リフローで再適用
+  flash.classList.add("flash-overlay");
 }
